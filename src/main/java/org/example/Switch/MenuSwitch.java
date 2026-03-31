@@ -18,14 +18,29 @@ public class MenuSwitch {
     }
     private void procesarSalario(){
         System.out.println("Ingrese salario: ");
-        double salario = scanner.nextDouble();
-        String categoria = GetCategory.getCategorySalarial(salario);
+        var salario = scanner.nextDouble();
+        //Estas son las validaciones de los datos primitivis deacuerdo a limites.
+        if (salario <= 0) {
+            System.out.println("El salario debe ser mayor que 0");
+            } 
+        else if (salario > 1000000000) {
+            System.out.println("El salario es demasiado alto");
+            } 
+        else {
+            System.out.println("Salario válido");
+            }
+        var categoria = GetCategory.getCategorySalarial(salario);
         System.out.println(("Categoria: " + categoria));
     }
     public void iniciar(){
         int opcion;
+        
         do{
             opcion = scanner.nextInt();
+            //Estoy validando el rango de opciones
+            if (opcion < 1 || opcion > 2) {
+            System.out.println("Opcion fuera de rango");
+            }
             switch (opcion){
                 case 1 :
                     procesarSalario();
