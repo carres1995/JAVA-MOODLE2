@@ -1,36 +1,55 @@
 package org.example.Switch;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import org.example.service.GetCategory;
+import org.example.service.PerformanceMatrix;
 
 public class MenuSwitch {
-    
+    PerformanceMatrix performance = new PerformanceMatrix();
     Scanner scanner = new Scanner(System.in);
     public void mostrarMenu() {
         String formato =
                 """
                 === MENÚ ===,
                 1. Clasificar salario
-                2. Salir
+                2. Procesar desempeño
+                3. Salir
                 """;
         System.out.println(formato);
 
     }
     private void procesarSalario(){
-        System.out.println("Ingrese salario: ");
-        var salario = scanner.nextDouble();
-        //Estas son las validaciones de los datos primitivis deacuerdo a limites.
-        if (salario <= 0) {
-            System.out.println("El salario debe ser mayor que 0");
-            } 
-        else if (salario > 1000000000) {
-            System.out.println("El salario es demasiado alto");
-            } 
-        else {
-            System.out.println("Salario válido");
-            }
-        var categoria = GetCategory.getCategorySalarial(salario);
-        System.out.println(("Categoria: " + categoria));
+        try {
+            System.out.println("Ingrese salario: ");
+            var salario = scanner.nextDouble();
+            //Estas son las validaciones de los datos primitivis deacuerdo a limites.
+            if (salario <= 0) {
+                System.out.println("El salario debe ser mayor que 0");
+                } 
+            else if (salario > 1000000000) {
+                System.out.println("El salario es demasiado alto");
+                } 
+            else {
+                System.out.println("Salario válido");
+                }
+            var categoria = GetCategory.getCategorySalarial(salario);
+            System.out.println(("Categoria: " + categoria));
+        } catch (InputMismatchException e) {
+            System.out.println("Entrada no valida. Por favor, ingrese un número.");
+            scanner.next(); // Limpiar el buffer del scanner
+        }
+        /*
+        En Java 8, los mensajes de error de excepciones como InputMismatchException
+        son básicos y no siempre indican claramente el origen del problema.
+
+        En Java 17/21 (LTS), los mensajes de error son más descriptivos,
+        incluyendo detalles como el tipo esperado, el valor recibido
+        y en algunos casos la línea exacta del fallo.
+
+        Esto facilita el debugging y reduce el tiempo de diagnóstico de errores,
+        haciendo el código más mantenible y seguro.
+        */
     }
     public void iniciar(){
         int opcion;
@@ -46,6 +65,9 @@ public class MenuSwitch {
                     procesarSalario();
                     break;
                 case 2:
+                    performance.procesarDesempeno();
+                    break;
+                case 3:
                     System.out.println("salir");
                 default:
                     System.out.println("opcion invalida");
