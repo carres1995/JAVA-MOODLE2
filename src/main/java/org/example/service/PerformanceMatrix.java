@@ -22,12 +22,16 @@ public class PerformanceMatrix {
             //Calcular promedio
             double promedio = suma / calificaciones[i].length;
 
+            //este es el operador ternario, donde genera una validacion
+            String estado = promedio >= 4.5 ? "Promovido" : "No promovido";
+
             int puntajeSimplificado = (int) promedio;
 
             //Mostrar resultados
             System.out.println("Empleado " + (i + 1));
             System.out.println("Promedio real: " + promedio);
             System.out.println("Puntaje simplificado: " + puntajeSimplificado);
+            System.out.println("Estado: " + estado);
         }
     }
 }
