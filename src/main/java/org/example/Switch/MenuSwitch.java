@@ -2,16 +2,18 @@ package org.example.Switch;
 
 import java.util.Scanner;
 import org.example.service.GetCategory;
+import org.example.service.PerformanceMatrix;
 
 public class MenuSwitch {
-    
+    PerformanceMatrix performance = new PerformanceMatrix();
     Scanner scanner = new Scanner(System.in);
     public void mostrarMenu() {
         String formato =
                 """
                 === MENÚ ===,
                 1. Clasificar salario
-                2. Salir
+                2. Procesar desempeño
+                3. Salir
                 """;
         System.out.println(formato);
 
@@ -46,6 +48,9 @@ public class MenuSwitch {
                     procesarSalario();
                     break;
                 case 2:
+                    performance.procesarDesempeno();
+                    break;
+                case 3:
                     System.out.println("salir");
                 default:
                     System.out.println("opcion invalida");
