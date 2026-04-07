@@ -1,9 +1,9 @@
-package org.example.Switch;
+package org.example.moodle2.Switch;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import org.example.service.GetCategory;
-import org.example.service.PerformanceMatrix;
+import org.example.moodle2.service.GetCategory;
+import org.example.moodle2.service.PerformanceMatrix;
 
 public class MenuSwitch {
     PerformanceMatrix performance = new PerformanceMatrix();

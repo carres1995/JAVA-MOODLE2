@@ -1,4 +1,4 @@
-package org.example.service;
+package org.example.moodle2.service;
 
 public class GetCategory {
 
