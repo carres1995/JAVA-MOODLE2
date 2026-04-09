@@ -12,7 +12,7 @@ public class Menu {
         NominaGestion gestion = new NominaGestion();
         Scanner sc = new Scanner(System.in);
 
-        // 2. Creamos algunos empleados de prueba
+
         Empleado emp1 = new Empleado("C001", "Andres Restrepo");
         Empleado emp2 = new Empleado("C002", "Carlos Coder");
 
@@ -35,9 +35,10 @@ public class Menu {
         System.out.println("\n--- Listado Final ---");
         gestion.listarEmpleados();
 
-        //acceder a los datos inmutables
+        //acceder a los datos inmutables operacion tarea 2 moodle3
         System.out.println("\n sedes validas- inmutables " + gestion.getSedes().keySet());
         System.out.println("\n tecnologias validas- inmutables " + gestion.getTecnologias());
+        System.out.println("\n Mostrar los dos extremos de una lista " + gestion.mostrarExtremo());
     }
 
 }

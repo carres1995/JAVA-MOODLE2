@@ -63,4 +63,21 @@ public class NominaGestion {
     // Getters para las listas inmutables
     public List<String> getTecnologias() { return tecnologias; }
     public Map<String, String> getSedes() { return sedes; }
+
+    public String mostrarExtremo() {
+        if(listaEmpleados.isEmpty()){
+            return "La lista esta vacia";
+        }
+        var getFirst = listaEmpleados.getFirst();
+        var getLast = listaEmpleados.getLast();
+
+        List<Empleado> listaInversa = listaEmpleados.reversed();
+
+        return String.format("""
+                [Moderno] Primero: %s,
+                [Moderno] Último: %s,
+                [Moderno] Total en orden inverso: %d elementos
+                """, getFirst.getNombre(),getLast.getNombre(),listaInversa.size());
+
+    }
 }
