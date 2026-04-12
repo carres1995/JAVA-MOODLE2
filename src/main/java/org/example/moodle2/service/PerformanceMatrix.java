@@ -1,37 +1,49 @@
 package org.example.moodle2.service;
 
+import org.example.moodle2.domain.Empleado;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class PerformanceMatrix {
-    public void procesarDesempeno() {
+    public void procesarDesempeno(List<Empleado> empleados) {
 
         //Matriz
         double[][] calificaciones = {
                 {4.5, 4.2, 4.8},
-                {3.9, 4.0, 4.1},  
+                {3.0, 4.0, 3.1},
                 {5.0, 4.9, 4.7}   
         };
 
         // Recorrer la matriz con for anidados
         for (int i = 0; i < calificaciones.length; i++) {
-
+            var emp = empleados.get(i);
             double suma = 0;
+            double[] notasEmpleado = calificaciones[i];
 
-            for (int j = 0; j < calificaciones[i].length; j++) {
-                suma += calificaciones[i][j];
+            for (double nota : notasEmpleado) {
+                suma += nota;
             }
 
             //Calcular promedio
-            double promedio = suma / calificaciones[i].length;
+            double promedio = suma / notasEmpleado.length;
+            emp.setGrade(promedio);
+
+            int puntaje =(int) promedio;
+            emp.setPuntaje(puntaje);
 
             //este es el operador ternario, donde genera una validacion
             String estado = promedio >= 4.5 ? "Promovido" : "No promovido";
 
-            int puntajeSimplificado = (int) promedio;
-
             //Mostrar resultados
-            System.out.println("Empleado " + (i + 1));
-            System.out.println("Promedio real: " + promedio);
-            System.out.println("Puntaje simplificado: " + puntajeSimplificado);
-            System.out.println("Estado: " + estado);
+            System.out.println(String.format("""
+                    Empleado: %s,
+                    Promedio Real: %f,
+                    Estado: %s,
+                    
+                    Datos tecnicos del objeto: %s
+                    """, emp.getName(), promedio, estado, emp));
+
         }
     }
 }

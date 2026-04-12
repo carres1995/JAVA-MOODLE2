@@ -1,44 +1,38 @@
 package org.example.moodle3.menu.java;
 
-
-
-import org.example.moodle3.domain.Empleado;
+import org.example.moodle2.domain.Empleado;
+import org.example.moodle2.service.PerformanceMatrix;
 import org.example.moodle3.service.NominaGestion;
-
-import java.util.Scanner;
+import java.util.List;
 
 public class Menu {
-    public void main(){
-        NominaGestion gestion = new NominaGestion();
-        Scanner sc = new Scanner(System.in);
+    public void ejecutar() {
+        var gestion = new NominaGestion();
+        var performance = new PerformanceMatrix();
 
+        // 1. Crear datos
+        var emp1 = new Empleado("C001", "Andres Restrepo", 2500.0);
+        var emp2 = new Empleado("C002", "Carlos Coder", 100.0);
+        var emp3 = new Empleado("C003", "Mateo Coder", 3000.0);
 
-        Empleado emp1 = new Empleado("C001", "Andres Restrepo");
-        Empleado emp2 = new Empleado("C002", "Carlos Coder");
-
-        System.out.println("--- Agregando Empleados ---");
         gestion.agregarEmpleado(emp1);
         gestion.agregarEmpleado(emp2);
+        gestion.agregarEmpleado(emp3);
 
-        System.out.println("\n--- Listado Actual ---");
-        gestion.listarEmpleados();
+        // 2. Procesar Desempeño (Esto llena los puntajes)
+        System.out.println("\n--- Procesando Notas en Matriz ---");
+        performance.procesarDesempeno(gestion.getListaEmpleados());
 
-        System.out.println("\n--- Búsqueda Instantánea (HashMap) ---");
-        Empleado encontrado = gestion.buscarPorId("C001");
-        if (encontrado != null) {
-            System.out.println("Encontrado: " + encontrado.getNombre());
-        }
+        // 3. Mostrar Extremos (Java 21)
+        System.out.println("\n" + gestion.obtenerReporteExtremos());
 
-        System.out.println("\n--- Eliminando Empleado C002 ---");
-        gestion.eliminarEmpleado("C002");
+        // 4. Eliminación por puntaje (Task 4)
+        var despedidos = gestion.eliminarBajoPuntaje();
+        System.out.println("\n--- Empleados Eliminados (Puntaje < 4) ---");
+        despedidos.forEach(e -> System.out.println("Eliminado: " + e.getName()));
 
-        System.out.println("\n--- Listado Final ---");
-        gestion.listarEmpleados();
-
-        //acceder a los datos inmutables operacion tarea 2 moodle3
-        System.out.println("\n sedes validas- inmutables " + gestion.getSedes().keySet());
-        System.out.println("\n tecnologias validas- inmutables " + gestion.getTecnologias());
-        System.out.println("\n Mostrar los dos extremos de una lista " + gestion.mostrarExtremo());
+        // 5. Reporte Final
+        System.out.println("\n--- Estado Final de la Nómina ---");
+        gestion.generarReporteFinal();
     }
-
 }
