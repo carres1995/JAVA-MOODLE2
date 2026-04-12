@@ -1,26 +1,35 @@
-package org.example.Switch;
+package org.example.moodle2.Switch;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
-import org.example.service.GetCategory;
-import org.example.service.PerformanceMatrix;
+
+import org.example.moodle2.domain.Empleado;
+import org.example.moodle2.service.GetCategory;
+import org.example.moodle2.service.PerformanceMatrix;
 
 public class MenuSwitch {
+
     PerformanceMatrix performance = new PerformanceMatrix();
     Scanner scanner = new Scanner(System.in);
     public void mostrarMenu() {
         String formato =
                 """
                 === MENÚ ===,
-                1. Clasificar salario
+                1. clasificar salario empleado
                 2. Procesar desempeño
                 3. Salir
                 """;
         System.out.println(formato);
 
     }
-    private void procesarSalario(){
+    private void datosEmpleado(){
         try {
+            System.out.println("Ingresar ID: ");
+            var id = scanner.next();
+            System.out.println("Ingresa nombre: ");
+            var name = scanner.next();
             System.out.println("Ingrese salario: ");
             var salario = scanner.nextDouble();
             //Estas son las validaciones de los datos primitivis deacuerdo a limites.
@@ -34,7 +43,15 @@ public class MenuSwitch {
                 System.out.println("Salario válido");
                 }
             var categoria = GetCategory.getCategorySalarial(salario);
+
             System.out.println(("Categoria: " + categoria));
+
+            var emp = new Empleado(id, name, salario);
+            System.out.println(String.format("""
+                    ID: %s,
+                    Nombre: %s,
+                    Salario: %f
+                    """,emp.getId(),emp.getName(),emp.getSalary()));
         } catch (InputMismatchException e) {
             System.out.println("Entrada no valida. Por favor, ingrese un número.");
             scanner.next(); // Limpiar el buffer del scanner
@@ -62,10 +79,14 @@ public class MenuSwitch {
             }
             switch (opcion){
                 case 1 :
-                    procesarSalario();
+                    datosEmpleado();
                     break;
                 case 2:
-                    performance.procesarDesempeno();
+                    List<Empleado> misEmpleados = new ArrayList<>();
+                    misEmpleados.add(new Empleado("1", "Carlos", 2000000));
+                    misEmpleados.add(new Empleado("2", "Andres", 1000000));
+                    misEmpleados.add(new Empleado("3", "Carlos", 50000));
+                    performance.procesarDesempeno(misEmpleados);
                     break;
                 case 3:
                     System.out.println("salir");
