@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import org.example.moodle2.domain.Empleado;
+import org.example.moodle4.domain.Empleado;
 import org.example.moodle2.service.GetCategory;
 import org.example.moodle2.service.PerformanceMatrix;
 

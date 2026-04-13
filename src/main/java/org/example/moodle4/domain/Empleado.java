@@ -1,17 +1,13 @@
-package org.example.moodle2.domain;
+package org.example.moodle4.domain;
 
-import java.util.Arrays;
-
-public class Empleado {
-    private String id;
-    private String name;
+//Angela la genero non-sealed para que Empleado pueda heredar otra sub clase/ explicado en el moodle4/readme.md, aparte moverla de carpeta com concepto extricto de proximidad en java.
+public non-sealed class Empleado extends Persona {
     private double salary;
     private double grade;
     private int puntaje;
 
     public Empleado(String id, String name, double salary) {
-        this.id = id;
-        this.name = name;
+        super(id,name);
         this.salary = salary;
     }
 
